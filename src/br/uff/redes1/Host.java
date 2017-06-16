@@ -37,7 +37,15 @@ public class Host {
         try {
             this.socket = new Socket(address, port);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.err.println("Houve um erro ao tentar conectar " + toString() + ": " + ex.getMessage());
+        }
+    }
+
+    public void disconnect() {
+        try {
+            socket.close();
+        } catch (IOException ex) {
+            System.err.println("Houve um erro ao tentar desconectar " + toString() + ": " + ex.getMessage());
         }
     }
 

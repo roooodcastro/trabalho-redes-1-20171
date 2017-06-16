@@ -1,6 +1,8 @@
-package br.uff.redes1;
+package br.uff.redes1.ui;
 
-import java.util.InputMismatchException;
+import br.uff.redes1.Host;
+import br.uff.redes1.NetworkSimulator;
+
 import java.util.Scanner;
 
 /**
@@ -10,6 +12,14 @@ public class CommandLineInterface {
     private int state;
     private NetworkSimulator simulator;
     private Scanner scanner;
+    private CommandLineMenu actionsMenu;
+
+    private String[] actionLabels = new String[] {
+            "Conectar a um vizinho",
+            "Listar vizinhos conectados",
+            "Enviar mensagem a um vizinho",
+            "Terminar a execução"
+    };
 
     public static final int STATE_STARTUP = 0;
     public static final int STATE_GET_ACTION = 1;
@@ -20,11 +30,13 @@ public class CommandLineInterface {
     public static final int ACTION_CONNECT = 1;
     public static final int ACTION_PRINT_CONNECTED = 2;
     public static final int ACTION_SEND = 3;
+    public static final int ACTION_TERMINATE = 4;
 
     public CommandLineInterface(NetworkSimulator simulator) {
         this.state = 0;
         this.simulator = simulator;
         this.scanner = new Scanner(System.in);
+        this.actionsMenu = new CommandLineMenu("O que você quer fazer?", actionLabels, false);
     }
 
     public boolean isFinished() {
@@ -55,8 +67,7 @@ public class CommandLineInterface {
     }
 
     private void processNextAction() {
-        printActionList();
-        int action = getNextAction();
+        int action = actionsMenu.show();
         switch(action) {
             case ACTION_CONNECT:
                 this.state = STATE_CONNECT;
@@ -67,13 +78,49 @@ public class CommandLineInterface {
             case ACTION_SEND:
                 this.state = STATE_SEND_MESSAGE;
                 break;
-            default:
-                System.out.println("Opção inválida. Por favor selecione um número da lista.");
+            case ACTION_TERMINATE:
+                this.state = STATE_FINISHED;
+                System.out.println("Fechando conexões abertas e saindo...");
+                break;
         }
     }
 
+    /**
+     * Pede ao usuário qual vizinho ele quer se conectar, e tenta a conexão.
+     */
     private void getTargetToConnect() {
+        // Exibe o menu com os vizinhos para serem selecionados
+        CommandLineMenu neighboursMenu = new CommandLineMenu("Selecione um vizinho para se conectar",
+                simulator.getNeighboursNames(), true);
+        int result = neighboursMenu.show();
+        if (result == -1) return; // Não fazemos nada se o usuário digitou qualquer coisa (continua tentando)
+        if (result > 0) { // Se ele cancelou (opção 0), não tenta conectar e só muda o estado e volta ao menu principal
+            Host neighbour = simulator.getNeighbour(result - 1); // Diminuímos 1 pq as opções do menu começam em 1
+            connectNeighbour(neighbour);
+        }
+        this.state = STATE_GET_ACTION; // Depois de conectar, volta ao menu principal
+    }
 
+    /**
+     * Requere a conexão com o vizinho ao simulador e imprime o resultado de acordo com o código retornado pelo
+     * simulador.
+     *
+     * @param neighbour O vizinho que se quer conectar.
+     */
+    private void connectNeighbour(Host neighbour) {
+        int result = simulator.connectNeighbour(neighbour);
+        switch(result) {
+            case 0:
+                System.out.println(neighbour.toString() + " conectado");
+                break;
+            case 1:
+                System.out.println("Não foi possível se conectar ao " + neighbour.toString());
+                break;
+            case -1:
+                System.out.println(neighbour.toString() + " já está conectado");
+            case -2:
+                System.out.println(neighbour.toString() + " não existe!");
+        }
     }
 
     private void getTargetToSend() {
@@ -84,28 +131,10 @@ public class CommandLineInterface {
 
     }
 
-    private void printActionList() {
-        System.out.println("\nO que você quer fazer? (digite o número da opção)");
-        System.out.println("  1) Conectar a um vizinho");
-        System.out.println("  2) Listar vizinhos conectados");
-        System.out.println("  3) Enviar mensagem a um vizinho");
-        System.out.println("  4) Terminar a execução");
-    }
-
     private void printAllNeighbours() {
         for (Host neighbour : simulator.getNeighbours()) {
             System.out.println(neighbour.toString());
         }
-    }
-
-    private int getNextAction() {
-        int action = 0;
-        try {
-            action = Integer.parseInt(scanner.next());
-        } catch (NumberFormatException ex) {
-            System.out.println("Opção inválida. Por favor digite apenas números.");
-        }
-        return action;
     }
 
     private void printConnectedNeighbours() {
