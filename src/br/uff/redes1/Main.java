@@ -8,14 +8,10 @@ public class Main {
         }
 
 	    int listenerPort = Integer.parseInt(args[0]);
-        String neighbourListFile = args[1];
+        String neighboursFilePath = args[1];
 
-        // Abrir socket TCP na porta do receiver (em outra thread)
-        Client client = new Client(listenerPort);
-        client.start();
-
-        // Interagir com o usuário e perguntar oq ele quer fazer
-        
+        NetworkSimulator simulator = new NetworkSimulator(listenerPort, neighboursFilePath);
+        simulator.start();
     }
 
     private static boolean validateArguments(String[] args) {
