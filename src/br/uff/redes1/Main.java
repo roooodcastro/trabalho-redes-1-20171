@@ -1,5 +1,7 @@
 package br.uff.redes1;
 
+import br.uff.redes1.ipv4.Header;
+
 public class Main {
     public static void main(String[] args) {
         if (!validateArguments(args)) {

@@ -1,4 +1,4 @@
-package br.uff.redes1;
+package br.uff.redes1.ipv4;
 
 import java.io.IOException;
 import java.io.InputStream;
