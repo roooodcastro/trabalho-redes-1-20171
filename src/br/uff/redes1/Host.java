@@ -56,7 +56,6 @@ public class Host {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(message);
             out.close();
-            socket.close();
             return true;
         } catch (IOException ioex) {
             System.err.println("Houve um erro ao enviar uma mensagem para " + toString() + ": " + ioex.getMessage());

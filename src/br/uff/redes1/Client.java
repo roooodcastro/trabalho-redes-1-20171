@@ -43,7 +43,7 @@ public class Client extends Thread {
                 Socket client = listener.accept();
                 String message = getSocketMessage(client.getInputStream());
                 String sender = client.getRemoteSocketAddress().toString();
-                System.out.println("\n" + sender + " enviou uma mensagem: " + message);
+                System.out.println("\n" + sender + " Enviou uma mensagem: " + message.toString());
                 client.close();
             } catch (SocketException sex) {
                 System.out.println("Cliente terminado na porta " + portNumber);
@@ -54,9 +54,11 @@ public class Client extends Thread {
     }
 
     private String getSocketMessage(InputStream stream) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-        String message = in.readLine();
-        in.close();
-        return message;
+        try { Thread.sleep(10); } catch (InterruptedException ex) {}
+        if (stream.available() > 0) {
+            Datagram message = Datagram.fromInputStream(stream);
+            return message.toString();
+        }
+        return "";
     }
 }
