@@ -1,6 +1,7 @@
 package br.uff.redes1;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -49,7 +50,17 @@ public class Host {
         }
     }
 
-    public void sendMessage(String message) {
-        if (!isConnected()) return;
+    public boolean sendMessage(String message) {
+        connect();
+        try {
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(message);
+            out.close();
+            socket.close();
+            return true;
+        } catch (IOException ioex) {
+            System.err.println("Houve um erro ao enviar uma mensagem para " + toString() + ": " + ioex.getMessage());
+            return false;
+        }
     }
 }

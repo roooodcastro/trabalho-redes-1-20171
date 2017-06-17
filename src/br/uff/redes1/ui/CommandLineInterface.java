@@ -118,23 +118,23 @@ public class CommandLineInterface {
                 break;
             case -1:
                 System.out.println(neighbour.toString() + " já está conectado");
+                break;
             case -2:
                 System.out.println(neighbour.toString() + " não existe!");
+                break;
         }
-    }
-
-    private void getTargetToSend() {
-
     }
 
     private void getMessageToSend() {
-
-    }
-
-    private void printAllNeighbours() {
-        for (Host neighbour : simulator.getNeighbours()) {
-            System.out.println(neighbour.toString());
+        CommandLineMenu neighboursMenu = new CommandLineMenu("Selecione um vizinho para enviar a mensagem",
+                simulator.getNeighboursNames(), true);
+        int result = neighboursMenu.show();
+        if (result == -1) return; // Não fazemos nada se o usuário digitou qualquer coisa (continua tentando)
+        if (result > 0) { // Se ele cancelou (opção 0), não tenta enviar e só muda o estado e volta ao menu principal
+            Host neighbour = simulator.getNeighbour(result - 1); // Diminuímos 1 pq as opções do menu começam em 1
+            readAndSendMessage(neighbour);
         }
+        this.state = STATE_GET_ACTION;
     }
 
     private void printConnectedNeighbours() {
@@ -147,6 +147,13 @@ public class CommandLineInterface {
         }
         if (!anyConnected) {
             System.out.println("Não há vizinhos conectados.");
+        }
+    }
+
+    private void readAndSendMessage(Host neighbour) {
+        System.out.printf("Escreva sua mensagem > ");
+        if (neighbour.sendMessage(scanner.nextLine())) {
+            System.out.println("Mensagem enviada para " + neighbour.toString());
         }
     }
 }

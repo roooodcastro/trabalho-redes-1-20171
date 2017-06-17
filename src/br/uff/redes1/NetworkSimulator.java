@@ -5,6 +5,7 @@ import br.uff.redes1.ui.CommandLineInterface;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by rodcastro on 16/06/17.
@@ -58,7 +59,22 @@ public class NetworkSimulator {
         return neighbours;
     }
 
+    public List<Host> getConnectedNeighbours() {
+        List<Host> connectedNeighbours = new ArrayList<>(neighbours);
+        Predicate<Host> neighbourPredicate = h-> !h.isConnected();
+        connectedNeighbours.removeIf(neighbourPredicate);
+        return connectedNeighbours;
+    }
+
     public String[] getNeighboursNames() {
+        return getNeighboursNames(neighbours);
+    }
+
+    public String[] getConnectedNeighboursNames() {
+        return getNeighboursNames(getConnectedNeighbours());
+    }
+
+    public String[] getNeighboursNames(List<Host> neighbours) {
         String[] names = new String[neighbours.size()];
         for (int i = 0; i < neighbours.size(); i++) {
             names[i] = neighbours.get(i).toString();

@@ -1,6 +1,9 @@
 package br.uff.redes1;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -38,9 +41,9 @@ public class Client extends Thread {
         while (running) {
             try {
                 Socket client = listener.accept();
-                String message = client.getOutputStream().toString();
+                String message = getSocketMessage(client.getInputStream());
                 String sender = client.getRemoteSocketAddress().toString();
-                System.out.printf(sender + " enviou uma mensagem: " + message);
+                System.out.println("\n" + sender + " enviou uma mensagem: " + message);
                 client.close();
             } catch (SocketException sex) {
                 System.out.println("Cliente terminado na porta " + portNumber);
@@ -48,5 +51,12 @@ public class Client extends Thread {
                 System.err.println("Houve um erro ao receber mensagem na porta " + portNumber + ": " + ex.getMessage());
             }
         }
+    }
+
+    private String getSocketMessage(InputStream stream) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(stream));
+        String message = in.readLine();
+        in.close();
+        return message;
     }
 }
