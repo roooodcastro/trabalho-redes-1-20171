@@ -1,5 +1,7 @@
 package br.uff.redes1;
 
+import br.uff.redes1.server.Host;
+import br.uff.redes1.server.Listener;
 import br.uff.redes1.ui.CommandLineInterface;
 
 import java.io.*;
@@ -15,7 +17,7 @@ public class NetworkSimulator {
     private File neighboursFile;
     private CommandLineInterface cli;
     private List<Host> neighbours;
-    private Client client;
+    private Listener listener;
 
     public NetworkSimulator(int listenerPort, String neighboursFilePath) {
         this.listenerPort = listenerPort;
@@ -84,12 +86,12 @@ public class NetworkSimulator {
 
     private void startListener() {
         // Abrir socket TCP na porta do receiver (em outra thread)
-        this.client = new Client(listenerPort);
-        client.start();
+        this.listener = new Listener(listenerPort);
+        listener.start();
     }
 
     private void stopListener() {
-        client.close();
+        listener.close();
     }
 
     private void loadNeighbours() {

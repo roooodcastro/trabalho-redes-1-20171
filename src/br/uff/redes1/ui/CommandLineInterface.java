@@ -1,6 +1,6 @@
 package br.uff.redes1.ui;
 
-import br.uff.redes1.Host;
+import br.uff.redes1.server.Host;
 import br.uff.redes1.NetworkSimulator;
 
 import java.util.Scanner;

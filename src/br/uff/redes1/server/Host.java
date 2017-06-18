@@ -1,7 +1,9 @@
-package br.uff.redes1;
+package br.uff.redes1.server;
+
+import br.uff.redes1.ipv4.Datagram;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.OutputStream;
 import java.net.Socket;
 
 /**
@@ -51,11 +53,12 @@ public class Host {
     }
 
     public boolean sendMessage(String message) {
-        connect();
+        if (!isConnected()) return false;
         try {
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(message);
-            out.close();
+            OutputStream out = socket.getOutputStream();
+            Datagram datagram = new Datagram(message, socket.getLocalAddress().getHostAddress(), address);
+            out.write(datagram.getBytes());
+            out.flush();
             return true;
         } catch (IOException ioex) {
             System.err.println("Houve um erro ao enviar uma mensagem para " + toString() + ": " + ioex.getMessage());

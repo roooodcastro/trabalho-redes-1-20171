@@ -141,10 +141,10 @@ public class Header {
 
     private String longToIpString(long ip) {
         String[] pieces = new String[4];
-        pieces[0] = ((ip & 0xff000000L) >> 24) + "";
-        pieces[1] = ((ip & 0x00ff0000L) >> 16) + "";
-        pieces[2] = ((ip & 0x0000ff00L) >> 8) + "";
-        pieces[3] = (ip & 0x000000ffL) + "";
+        pieces[3] = ((ip & 0xff000000L) >> 24) + "";
+        pieces[2] = ((ip & 0x00ff0000L) >> 16) + "";
+        pieces[1] = ((ip & 0x0000ff00L) >> 8) + "";
+        pieces[0] = (ip & 0x000000ffL) + "";
         return String.join(".", pieces);
     }
 
