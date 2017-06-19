@@ -1,6 +1,6 @@
 package br.uff.redes1;
 
-import br.uff.redes1.server.Host;
+import br.uff.redes1.server.Neighbour;
 import br.uff.redes1.server.Listener;
 import br.uff.redes1.ui.CommandLineInterface;
 
@@ -15,28 +15,31 @@ import java.util.function.Predicate;
 public class NetworkSimulator {
     private int listenerPort;
     private File neighboursFile;
+    private File interfacesFile;
     private CommandLineInterface cli;
-    private List<Host> neighbours;
+    private List<Neighbour> neighbours;
     private Listener listener;
 
-    public NetworkSimulator(int listenerPort, String neighboursFilePath) {
+    public NetworkSimulator(int listenerPort, String neighboursFilePath, String interfacesFilePath) {
         this.listenerPort = listenerPort;
         this.neighboursFile = new File(neighboursFilePath);
+        this.interfacesFile = new File(interfacesFilePath);
         this.cli = new CommandLineInterface(this);
-        this.neighbours = new ArrayList<Host>();
+        this.neighbours = new ArrayList<Neighbour>();
     }
 
     public void start() {
-        loadNeighbours();
+        loadNeighbours(); // Load neighbours
+        loadInterfaces(); // Assign simulated interface addresses to them
         startListener();
         cli.start();
-        for (Host neighbour : neighbours) {
+        for (Neighbour neighbour : neighbours) {
             if (neighbour.isConnected()) neighbour.disconnect();
         }
         stopListener();
     }
 
-    public Host getNeighbour(int index) {
+    public Neighbour getNeighbour(int index) {
         return neighbours.get(index);
     }
 
@@ -50,20 +53,20 @@ public class NetworkSimulator {
      *  0  significa que o vizinho foi conectado corretamente
      *  1  significa que o vizinho não pode ser conectado (um erro ocorreu)
      */
-    public int connectNeighbour(Host neighbour) {
+    public int connectNeighbour(Neighbour neighbour) {
         if (neighbour == null) return -2;
         if (neighbour.isConnected()) return -1;
         neighbour.connect();
         return neighbour.isConnected() ? 0 : 1;
     }
 
-    public List<Host> getNeighbours() {
+    public List<Neighbour> getNeighbours() {
         return neighbours;
     }
 
-    public List<Host> getConnectedNeighbours() {
-        List<Host> connectedNeighbours = new ArrayList<>(neighbours);
-        Predicate<Host> neighbourPredicate = h-> !h.isConnected();
+    public List<Neighbour> getConnectedNeighbours() {
+        List<Neighbour> connectedNeighbours = new ArrayList<>(neighbours);
+        Predicate<Neighbour> neighbourPredicate = h-> !h.isConnected();
         connectedNeighbours.removeIf(neighbourPredicate);
         return connectedNeighbours;
     }
@@ -76,7 +79,7 @@ public class NetworkSimulator {
         return getNeighboursNames(getConnectedNeighbours());
     }
 
-    public String[] getNeighboursNames(List<Host> neighbours) {
+    public String[] getNeighboursNames(List<Neighbour> neighbours) {
         String[] names = new String[neighbours.size()];
         for (int i = 0; i < neighbours.size(); i++) {
             names[i] = neighbours.get(i).toString();
@@ -95,20 +98,41 @@ public class NetworkSimulator {
     }
 
     private void loadNeighbours() {
-        try (BufferedReader br = new BufferedReader(new FileReader(neighboursFile))) {
-            String neighbourLine;
-            while ((neighbourLine = br.readLine()) != null) {
-                String[] parts = neighbourLine.split(" ");
-                neighbours.add(new Host(parts[0], Integer.parseInt(parts[1])));
+        try {
+            List<String[]> lines = readFile(neighboursFile);
+            for (String[] parts : lines) {
+                neighbours.add(new Neighbour(parts[0], Integer.parseInt(parts[1])));
             }
-        } catch (FileNotFoundException fnfex) {
-            System.err.println("O arquivo \"" + neighboursFile.getAbsolutePath() + "\" não foi encontrado");
-        } catch (IOException ioex) {
-            System.err.println("Houve um erro ao tentar abrir o arquivo \"" + neighboursFile.getAbsolutePath() +
-                    "\" para leitura");
         } catch (NumberFormatException nfex) {
             System.err.println("Houve um erro na leitura do arquivo \"" + neighboursFile.getAbsolutePath() +
                     "\". Verifique se as definições das portas estão corretas.");
         }
+    }
+
+    private void loadInterfaces() {
+        List<String[]> lines = readFile(interfacesFile);
+        for (int i = 0; i < lines.size(); i++) {
+            String[] parts = lines.get(i);
+            Neighbour neighbour = neighbours.get(i);
+            neighbour.setAddress(parts[0]);
+            neighbour.setSubnetMask(parts[1]);
+        }
+    }
+
+    private List<String[]> readFile(File file) {
+        List<String[]> lines = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line.split(" "));
+            }
+            return lines;
+        } catch (FileNotFoundException fnfex) {
+            System.err.println("O arquivo \"" + file.getAbsolutePath() + "\" não foi encontrado");
+        } catch (IOException ioex) {
+            System.err.println("Houve um erro ao tentar abrir o arquivo \"" + file.getAbsolutePath() +
+                    "\" para leitura");
+        }
+        return new ArrayList<>(); // Se não conseguiu ler, retorna uma lista vazia. Nada será processado.
     }
 }

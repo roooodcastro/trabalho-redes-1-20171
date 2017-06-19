@@ -10,6 +10,9 @@ public class Datagram {
     private String message;
     private Header header;
 
+    // TODO: Verificar se o tamanho do datagrama (hedaer + mensagem) excede 65535 bytes (2^16). Se exceder, fragmentar
+    // TODO: o datagrama em pedaços, usando o campo identifier para
+
     public Datagram(String message, String sourceIp, String destinationIp) {
         this.message = message;
         this.header = new Header(message.getBytes().length, 1, sourceIp, destinationIp);
@@ -39,6 +42,10 @@ public class Datagram {
             bytes[headerBytes.length + i] = messageBytes[i];
         }
         return bytes;
+    }
+
+    public boolean isFragmented() {
+        return header.getIdentifier() > 0;
     }
 
     public Header getHeader() {

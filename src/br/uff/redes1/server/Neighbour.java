@@ -9,23 +9,35 @@ import java.net.Socket;
 /**
  * Created by rodcastro on 16/06/17.
  */
-public class Host {
-    private String address;
-    private int port;
-    Socket socket;
+public class Neighbour {
+    private String realAddress; // "Real" IP address (127.0.0.1 if running on localhost)
+    private String address;     // Simulated IP address
+    private String subnetMask;  // Subnet mask
+    private int port;           //
+    Socket socket;              // Socket from host (the simulator on this instance) to this neighbour
 
-    public Host(String address, int port) {
-        this.address = address;
+    public Neighbour(String realAddress, int port) {
+        this.realAddress = realAddress;
+        this.address = "0.0.0.0";            // Default value, will be changed later
+        this.subnetMask = "255.255.255.255"; // Default value, will be changed later
         this.port = port;
-        this.socket = null;
+        this.socket = null; // Will be opened when the simulator connects to it.
     }
 
-    public String getAddress() {
-        return address;
+    public String getRealAddress() {
+        return realAddress;
     }
 
     public int getPort() {
         return port;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setSubnetMask(String subnetMask) {
+        this.subnetMask = subnetMask;
     }
 
     public boolean isConnected() {
@@ -33,12 +45,12 @@ public class Host {
     }
 
     public String toString() {
-        return "Host: (" + address + ", " + port + ")";
+        return "Neighbour: (IP: " + address + ", Mask: " + subnetMask + ", Port: " + port + ")";
     }
 
     public void connect() {
         try {
-            this.socket = new Socket(address, port);
+            this.socket = new Socket(realAddress, port);
         } catch (IOException ex) {
             System.err.println("Houve um erro ao tentar conectar " + toString() + ": " + ex.getMessage());
         }
@@ -56,7 +68,7 @@ public class Host {
         if (!isConnected()) return false;
         try {
             OutputStream out = socket.getOutputStream();
-            Datagram datagram = new Datagram(message, socket.getLocalAddress().getHostAddress(), address);
+            Datagram datagram = new Datagram(message, realAddress, address);
             out.write(datagram.getBytes());
             out.flush();
             return true;

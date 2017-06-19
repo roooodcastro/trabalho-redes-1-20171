@@ -1,6 +1,6 @@
 package br.uff.redes1.ui;
 
-import br.uff.redes1.server.Host;
+import br.uff.redes1.server.Neighbour;
 import br.uff.redes1.NetworkSimulator;
 
 import java.util.Scanner;
@@ -95,7 +95,7 @@ public class CommandLineInterface {
         int result = neighboursMenu.show();
         if (result == -1) return; // Não fazemos nada se o usuário digitou qualquer coisa (continua tentando)
         if (result > 0) { // Se ele cancelou (opção 0), não tenta conectar e só muda o estado e volta ao menu principal
-            Host neighbour = simulator.getNeighbour(result - 1); // Diminuímos 1 pq as opções do menu começam em 1
+            Neighbour neighbour = simulator.getNeighbour(result - 1); // Diminuímos 1 pq as opções do menu começam em 1
             connectNeighbour(neighbour);
         }
         this.state = STATE_GET_ACTION; // Depois de conectar, volta ao menu principal
@@ -107,7 +107,7 @@ public class CommandLineInterface {
      *
      * @param neighbour O vizinho que se quer conectar.
      */
-    private void connectNeighbour(Host neighbour) {
+    private void connectNeighbour(Neighbour neighbour) {
         int result = simulator.connectNeighbour(neighbour);
         switch(result) {
             case 0:
@@ -127,11 +127,11 @@ public class CommandLineInterface {
 
     private void getMessageToSend() {
         CommandLineMenu neighboursMenu = new CommandLineMenu("Selecione um vizinho para enviar a mensagem",
-                simulator.getNeighboursNames(), true);
+                simulator.getConnectedNeighboursNames(), true);
         int result = neighboursMenu.show();
         if (result == -1) return; // Não fazemos nada se o usuário digitou qualquer coisa (continua tentando)
         if (result > 0) { // Se ele cancelou (opção 0), não tenta enviar e só muda o estado e volta ao menu principal
-            Host neighbour = simulator.getNeighbour(result - 1); // Diminuímos 1 pq as opções do menu começam em 1
+            Neighbour neighbour = simulator.getNeighbour(result - 1); // Diminuímos 1 pq as opções do menu começam em 1
             readAndSendMessage(neighbour);
         }
         this.state = STATE_GET_ACTION;
@@ -139,7 +139,7 @@ public class CommandLineInterface {
 
     private void printConnectedNeighbours() {
         boolean anyConnected = false;
-        for (Host neighbour : simulator.getNeighbours()) {
+        for (Neighbour neighbour : simulator.getNeighbours()) {
             if (neighbour.isConnected()) {
                 System.out.println(neighbour.toString());
                 anyConnected = true;
@@ -150,7 +150,7 @@ public class CommandLineInterface {
         }
     }
 
-    private void readAndSendMessage(Host neighbour) {
+    private void readAndSendMessage(Neighbour neighbour) {
         System.out.printf("Escreva sua mensagem > ");
         if (neighbour.sendMessage(scanner.nextLine())) {
             System.out.println("Mensagem enviada para " + neighbour.toString());
