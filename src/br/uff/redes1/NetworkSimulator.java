@@ -16,27 +16,31 @@ public class NetworkSimulator {
     private int listenerPort;
     private File neighboursFile;
     private File interfacesFile;
+    private File routingFile;
     private CommandLineInterface cli;
     private List<Neighbour> neighbours;
     private Listener listener;
 
-    public NetworkSimulator(int listenerPort, String neighboursFilePath, String interfacesFilePath) {
+    public NetworkSimulator(int listenerPort, String neighboursFilePath, String interfacesFilePath,
+                            String routingFilePath) {
         this.listenerPort = listenerPort;
         this.neighboursFile = new File(neighboursFilePath);
         this.interfacesFile = new File(interfacesFilePath);
+        this.routingFile = new File(routingFilePath);
         this.cli = new CommandLineInterface(this);
         this.neighbours = new ArrayList<Neighbour>();
     }
 
     public void start() {
-        loadNeighbours(); // Load neighbours
-        loadInterfaces(); // Assign simulated interface addresses to them
-        startListener();
-        cli.start();
-        for (Neighbour neighbour : neighbours) {
-            if (neighbour.isConnected()) neighbour.disconnect();
+        loadNeighbours();   // Load neighbours
+        loadInterfaces();   // Assign simulated interface addresses to them
+        if (startListener() ) {
+            cli.start();
+            for (Neighbour neighbour : neighbours) {
+                if (neighbour.isConnected()) neighbour.disconnect();
+            }
+            stopListener();
         }
-        stopListener();
     }
 
     public Neighbour getNeighbour(int index) {
@@ -87,10 +91,13 @@ public class NetworkSimulator {
         return names;
     }
 
-    private void startListener() {
+    private boolean startListener() {
         // Abrir socket TCP na porta do receiver (em outra thread)
-        this.listener = new Listener(listenerPort);
-        listener.start();
+        this.listener = new Listener(listenerPort, neighbours, routingFile);
+        if (listener.isValid()) {
+            listener.start();
+        }
+        return listener.isValid();
     }
 
     private void stopListener() {
@@ -99,7 +106,7 @@ public class NetworkSimulator {
 
     private void loadNeighbours() {
         try {
-            List<String[]> lines = readFile(neighboursFile);
+            List<String[]> lines = FileUtil.readFile(neighboursFile);
             for (String[] parts : lines) {
                 neighbours.add(new Neighbour(parts[0], Integer.parseInt(parts[1])));
             }
@@ -110,29 +117,12 @@ public class NetworkSimulator {
     }
 
     private void loadInterfaces() {
-        List<String[]> lines = readFile(interfacesFile);
+        List<String[]> lines = FileUtil.readFile(interfacesFile);
         for (int i = 0; i < lines.size(); i++) {
             String[] parts = lines.get(i);
             Neighbour neighbour = neighbours.get(i);
             neighbour.setAddress(parts[0]);
             neighbour.setSubnetMask(parts[1]);
         }
-    }
-
-    private List<String[]> readFile(File file) {
-        List<String[]> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line.split(" "));
-            }
-            return lines;
-        } catch (FileNotFoundException fnfex) {
-            System.err.println("O arquivo \"" + file.getAbsolutePath() + "\" não foi encontrado");
-        } catch (IOException ioex) {
-            System.err.println("Houve um erro ao tentar abrir o arquivo \"" + file.getAbsolutePath() +
-                    "\" para leitura");
-        }
-        return new ArrayList<>(); // Se não conseguiu ler, retorna uma lista vazia. Nada será processado.
     }
 }

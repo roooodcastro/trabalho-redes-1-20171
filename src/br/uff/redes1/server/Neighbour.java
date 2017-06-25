@@ -24,12 +24,21 @@ public class Neighbour {
         this.socket = null; // Will be opened when the simulator connects to it.
     }
 
+    public Neighbour(String interfaceAddress, String subnetMask) {
+        this.address = address;
+        this.subnetMask = subnetMask;
+    }
+
     public String getRealAddress() {
         return realAddress;
     }
 
     public int getPort() {
         return port;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
@@ -65,10 +74,14 @@ public class Neighbour {
     }
 
     public boolean sendMessage(String message) {
-        if (!isConnected()) return false;
+        Datagram datagram = new Datagram(message, realAddress, address);
+        return sendMessage(datagram);
+    }
+
+    public boolean sendMessage(Datagram datagram) {
+        if (!isConnected()) connect();
         try {
             OutputStream out = socket.getOutputStream();
-            Datagram datagram = new Datagram(message, realAddress, address);
             out.write(datagram.getBytes());
             out.flush();
             return true;

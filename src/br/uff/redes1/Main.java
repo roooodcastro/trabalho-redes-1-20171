@@ -15,8 +15,10 @@ public class Main {
         int listenerPort = Integer.parseInt(args[0]);
         String neighboursFilePath = args[1];
         String interfacesFilePath = args[2];
+        String routingFilePath = args[3];
 
-        NetworkSimulator simulator = new NetworkSimulator(listenerPort, neighboursFilePath, interfacesFilePath);
+        NetworkSimulator simulator = new NetworkSimulator(listenerPort, neighboursFilePath, interfacesFilePath,
+                routingFilePath);
         simulator.start();
     }
 
