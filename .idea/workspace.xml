@@ -7,14 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03233556-58b2-47e1-9b76-a7e7049146e6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/br/uff/redes1/FileUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/Main.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Listener.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Listener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,11 +27,25 @@
       <file leaf-file-name="NetworkSimulator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="41" column="27" lean-forward="true" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
+            <state relative-caret-position="140">
+              <caret line="71" column="24" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2371#2372#0" expanded="true" />
+                <element signature="e#2402#2403#0" expanded="true" />
+                <element signature="e#2858#2859#0" expanded="true" />
+                <element signature="e#2921#2922#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Datagram.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="15" column="76" lean-forward="true" selection-start-line="15" selection-start-column="76" selection-end-line="15" selection-end-column="76" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="762">
-              <caret line="68" column="117" lean-forward="true" selection-start-line="68" selection-start-column="117" selection-end-line="68" selection-end-column="117" />
+            <state relative-caret-position="642">
+              <caret line="62" column="101" lean-forward="true" selection-start-line="62" selection-start-column="101" selection-end-line="62" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -79,12 +90,16 @@
       <file leaf-file-name="Router.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Router.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="40">
+              <caret line="41" column="57" lean-forward="true" selection-start-line="41" selection-start-column="57" selection-end-line="41" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1519#1520#0" expanded="true" />
-                <element signature="e#1547#1548#0" expanded="true" />
+                <element signature="e#1393#1394#0" expanded="true" />
+                <element signature="e#1448#1449#0" expanded="true" />
+                <element signature="e#1694#1695#0" expanded="true" />
+                <element signature="e#1722#1723#0" expanded="true" />
+                <element signature="e#1778#1779#0" expanded="true" />
+                <element signature="e#1854#1855#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,13 +108,23 @@
       <file leaf-file-name="Neighbour.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="16" column="102" lean-forward="false" selection-start-line="16" selection-start-column="102" selection-end-line="16" selection-end-column="102" />
+            <state relative-caret-position="442">
+              <caret line="76" column="74" lean-forward="true" selection-start-line="76" selection-start-column="74" selection-end-line="76" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1230#1231#0" expanded="true" />
                 <element signature="e#1260#1261#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CommandLineInterface.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="682">
+              <caret line="106" column="113" lean-forward="true" selection-start-line="106" selection-start-column="113" selection-end-line="106" selection-end-column="113" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -148,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Host.java" />
-        <option value="$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java" />
         <option value="$PROJECT_DIR$/v1_vizinhos1.txt" />
         <option value="$PROJECT_DIR$/vizinhos2.txt" />
         <option value="$PROJECT_DIR$/vizinhos5002.txt" />
@@ -161,10 +185,11 @@
         <option value="$PROJECT_DIR$/src/br/uff/redes1/FileUtil.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Address.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Listener.java" />
-        <option value="$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java" />
+        <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" />
-        <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" />
+        <option value="$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java" />
+        <option value="$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java" />
       </list>
     </option>
   </component>
@@ -646,12 +671,12 @@
       <workItem from="1497828327678" duration="4838000" />
       <workItem from="1498190204063" duration="1232000" />
       <workItem from="1498322119501" duration="1238000" />
-      <workItem from="1498428052338" duration="4809000" />
+      <workItem from="1498428052338" duration="6859000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51079000" />
+    <option name="totallyTimeSpent" value="53129000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="24" width="1863" height="1056" extended-state="6" />
@@ -710,6 +735,10 @@
           <caret line="126" column="16" lean-forward="false" selection-start-line="126" selection-start-column="16" selection-end-line="126" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2371#2372#0" expanded="true" />
+            <element signature="e#2402#2403#0" expanded="true" />
+            <element signature="e#2858#2859#0" expanded="true" />
+            <element signature="e#2921#2922#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -809,6 +838,10 @@
           <caret line="56" column="5" lean-forward="true" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2371#2372#0" expanded="true" />
+            <element signature="e#2402#2403#0" expanded="true" />
+            <element signature="e#2858#2859#0" expanded="true" />
+            <element signature="e#2921#2922#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -930,20 +963,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="47" lean-forward="true" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="129" column="63" lean-forward="true" selection-start-line="129" selection-start-column="63" selection-end-line="129" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interfaces5002.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1026,33 +1045,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="16" column="102" lean-forward="false" selection-start-line="16" selection-start-column="102" selection-end-line="16" selection-end-column="102" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1230#1231#0" expanded="true" />
-            <element signature="e#1260#1261#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="19" column="46" lean-forward="false" selection-start-line="19" selection-start-column="46" selection-end-line="19" selection-end-column="46" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="41" column="27" lean-forward="true" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1069,22 +1066,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="15" column="76" lean-forward="true" selection-start-line="15" selection-start-column="76" selection-end-line="15" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Router.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="40">
+          <caret line="41" column="57" lean-forward="true" selection-start-line="41" selection-start-column="57" selection-end-line="41" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1519#1520#0" expanded="true" />
-            <element signature="e#1547#1548#0" expanded="true" />
+            <element signature="e#1393#1394#0" expanded="true" />
+            <element signature="e#1448#1449#0" expanded="true" />
+            <element signature="e#1694#1695#0" expanded="true" />
+            <element signature="e#1722#1723#0" expanded="true" />
+            <element signature="e#1778#1779#0" expanded="true" />
+            <element signature="e#1854#1855#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="76" column="74" lean-forward="true" selection-start-line="76" selection-start-column="74" selection-end-line="76" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1230#1231#0" expanded="true" />
+            <element signature="e#1260#1261#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="71" column="24" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2371#2372#0" expanded="true" />
+            <element signature="e#2402#2403#0" expanded="true" />
+            <element signature="e#2858#2859#0" expanded="true" />
+            <element signature="e#2921#2922#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="68" column="117" lean-forward="true" selection-start-line="68" selection-start-column="117" selection-end-line="68" selection-end-column="117" />
+        <state relative-caret-position="642">
+          <caret line="62" column="101" lean-forward="true" selection-start-line="62" selection-start-column="101" selection-end-line="62" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="106" column="113" lean-forward="true" selection-start-line="106" selection-start-column="113" selection-end-line="106" selection-end-column="113" />
           <folding />
         </state>
       </provider>

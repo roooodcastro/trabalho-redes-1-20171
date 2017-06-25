@@ -73,8 +73,8 @@ public class Neighbour {
         }
     }
 
-    public boolean sendMessage(String message) {
-        Datagram datagram = new Datagram(message, realAddress, address);
+    public boolean sendMessage(String message, String destinationIp) {
+        Datagram datagram = new Datagram(message, address, destinationIp);
         return sendMessage(datagram);
     }
 

@@ -68,6 +68,10 @@ public class NetworkSimulator {
         return neighbours;
     }
 
+    public Listener getListener() {
+        return listener;
+    }
+
     public List<Neighbour> getConnectedNeighbours() {
         List<Neighbour> connectedNeighbours = new ArrayList<>(neighbours);
         Predicate<Neighbour> neighbourPredicate = h-> !h.isConnected();
@@ -79,8 +83,12 @@ public class NetworkSimulator {
         return getNeighboursNames(neighbours);
     }
 
-    public String[] getConnectedNeighboursNames() {
-        return getNeighboursNames(getConnectedNeighbours());
+    public List<Neighbour> getAvailableDestinations() {
+        return listener.getRouter().getAvailableHosts();
+    }
+
+    public String[] getAvailableDestinationsNames() {
+        return getNeighboursNames(listener.getRouter().getAvailableHosts());
     }
 
     public String[] getNeighboursNames(List<Neighbour> neighbours) {

@@ -4,10 +4,7 @@ import br.uff.redes1.FileUtil;
 import br.uff.redes1.ipv4.Datagram;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by rodcastro on 25/06/17.
@@ -41,6 +38,14 @@ public class Router {
     }
 
     /**
+     * Returns a list with all the hosts this router knows the routes to.
+     * @return A list containing hosts with known routes.
+     */
+    public List<Neighbour> getAvailableHosts() {
+        return new ArrayList<>(routes.keySet());
+    }
+
+    /**
      * Checks the routes loaded from the file against the aailable interfaces.
      * @return True if all is good, false if there's a route entry trying to route to an unavailable interface.
      */
@@ -48,18 +53,22 @@ public class Router {
         return valid;
     }
 
+    public Neighbour findNextJump(Datagram datagram) {
+        return findNextJump(datagram.getHeader().getDestinationIp());
+    }
+
     /**
      * Looks up routing table to find the next jump for a given packet.
-     * @param datagram The packet
+     * @param destinationIp The destination final address
      * @return The next neighbour to send the packet to, or null if the packet has reached its destination OR it can't
      * be routed to its destination.
      */
-    public Neighbour findNextJump(Datagram datagram) {
-        if (!isFinalDestination(datagram)) {
+    public Neighbour findNextJump(String destinationIp) {
+        if (!isFinalDestination(destinationIp)) {
             Iterator it = routes.entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry<Neighbour, Neighbour> pair = (Map.Entry)it.next();
-                if (datagram.getHeader().getDestinationIp().equals(pair.getKey().getAddress())) {
+                if (destinationIp.equals(pair.getKey().getAddress())) {
                     return pair.getValue();
                 }
                 it.remove(); // Avoids a ConcurrentModificationException
@@ -68,14 +77,18 @@ public class Router {
         return null;
     }
 
+    public boolean isFinalDestination(Datagram datagram) {
+        return isFinalDestination(datagram.getHeader().getDestinationIp());
+    }
+
     /**
      * Checks if the datagram reached its destination.
-     * @param datagram The packet to check
+     * @param destinationIp The destination final address
      * @return True if this instance is the datagram's destination, false otherwise
      */
-    public boolean isFinalDestination(Datagram datagram) {
+    public boolean isFinalDestination(String destinationIp) {
         for (Neighbour neighbour : interfaces) {
-            if (datagram.getHeader().getDestinationIp() == neighbour.getAddress()) {
+            if (destinationIp == neighbour.getAddress()) {
                 return true;
             }
         }
