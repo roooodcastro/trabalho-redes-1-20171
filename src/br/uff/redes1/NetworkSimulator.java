@@ -21,6 +21,13 @@ public class NetworkSimulator {
     private List<Neighbour> neighbours;
     private Listener listener;
 
+    /**
+     * Cria uma nova instância do simulador de redes
+     * @param listenerPort A porta por onde o Listener vai receber pacotes de vizinhos
+     * @param neighboursFilePath O caminho para o arquivo de vizinhos
+     * @param interfacesFilePath O caminho para o arquivo de interfaces
+     * @param routingFilePath O caminho para o arquivo de roteamento
+     */
     public NetworkSimulator(int listenerPort, String neighboursFilePath, String interfacesFilePath,
                             String routingFilePath) {
         this.listenerPort = listenerPort;
@@ -31,6 +38,16 @@ public class NetworkSimulator {
         this.neighbours = new ArrayList<Neighbour>();
     }
 
+    /**
+     * Tenta initiar o simulador. Carrega os arquivos, e caso o arquivo de roteamento esteja válido, inicia o Listener e
+     * a interface de linha de comando.
+     *
+     * A CLI roda na thread principal do programa, logo, quando o método cli.start() retornar, significa que o usuário
+     * decidiu terminar a execução. Então fechamos todas as conexões com os vizinhos e paramos o Listener.
+     *
+     * Caso o arquivo de roteamento tenha alguma inconsistência, não inicia nada e retorna sem executar o programa.
+     * Uma mensagem será exibida para o usuário posteriormente informando o motivo
+     */
     public void start() {
         loadNeighbours();   // Load neighbours
         loadInterfaces();   // Assign simulated interface addresses to them
@@ -43,6 +60,9 @@ public class NetworkSimulator {
         }
     }
 
+    /**
+     * Retorna um vizinho a partir de um índice
+     */
     public Neighbour getNeighbour(int index) {
         return neighbours.get(index);
     }
@@ -72,6 +92,9 @@ public class NetworkSimulator {
         return listener;
     }
 
+    /**
+     * Retorna uma lista contendo os vizinhos que estão atualmente conectados
+     */
     public List<Neighbour> getConnectedNeighbours() {
         List<Neighbour> connectedNeighbours = new ArrayList<>(neighbours);
         Predicate<Neighbour> neighbourPredicate = h-> !h.isConnected();
@@ -91,6 +114,9 @@ public class NetworkSimulator {
         return getNeighboursNames(listener.getRouter().getAvailableHosts());
     }
 
+    /**
+     * Retorna um array de strings com os nomes (IP, máscara e porta) dos vizinhos passados no parâmetro.
+     */
     public String[] getNeighboursNames(List<Neighbour> neighbours) {
         String[] names = new String[neighbours.size()];
         for (int i = 0; i < neighbours.size(); i++) {
@@ -99,6 +125,10 @@ public class NetworkSimulator {
         return names;
     }
 
+    /**
+     * Tenta iniciar o Listener. Caso o arquivo de roteamento não seja válido, o Listener não será iniciado.
+     * @return True se o listener for iniciado, ou false se não for.
+     */
     private boolean startListener() {
         // Abrir socket TCP na porta do receiver (em outra thread)
         this.listener = new Listener(listenerPort, neighbours, routingFile);
@@ -112,6 +142,9 @@ public class NetworkSimulator {
         listener.close();
     }
 
+    /**
+     * Carrega o arquivo de vizinhos, preenchendo uma lista de vizinhos com os vizinhos recém-criados
+     */
     private void loadNeighbours() {
         try {
             List<String[]> lines = FileUtil.readFile(neighboursFile);
@@ -124,6 +157,9 @@ public class NetworkSimulator {
         }
     }
 
+    /**
+     * Carrega o arquivo de interfaces e percorre a lista de vizinhos completando as informações em cada um deles.
+     */
     private void loadInterfaces() {
         List<String[]> lines = FileUtil.readFile(interfacesFile);
         for (int i = 0; i < lines.size(); i++) {

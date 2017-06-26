@@ -23,6 +23,12 @@ public class Router {
         loadRoutes(routingFile);
     }
 
+    /**
+     * Carrega o arquivo de roteamento e preenche um hash mapeando um destino a uma interface de saída.
+     * Ambos destino e saída são representados por um Neighbour. Isso obviamente não é a solução ideal em relação a
+     * boas práticas de OOP (mesma classe com responsabilidades diferentes), mas funciona e simplifica a solução do
+     * problema.
+     */
     private void loadRoutes(File routingFile) {
         try {
             List<String[]> lines = FileUtil.readFile(routingFile);
@@ -53,6 +59,9 @@ public class Router {
         return valid;
     }
 
+    /**
+     * Overload para passar um Datagram como parâmetro
+     */
     public Neighbour findNextJump(Datagram datagram) {
         return findNextJump(datagram.getHeader().getDestinationIp());
     }
@@ -77,6 +86,9 @@ public class Router {
         return null;
     }
 
+    /**
+     * Overload para passar um Datagram como parâmetro
+     */
     public boolean isFinalDestination(Datagram datagram) {
         return isFinalDestination(datagram.getHeader().getDestinationIp());
     }

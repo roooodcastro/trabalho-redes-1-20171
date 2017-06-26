@@ -12,14 +12,21 @@ public class Main {
             return;
         }
 
+        // Pega e nomeia os argumentos
         int listenerPort = Integer.parseInt(args[0]);
         String neighboursFilePath = args[1];
         String interfacesFilePath = args[2];
         String routingFilePath = args[3];
 
+        // Instancia um simulador e tenta iniciá-lo (caso o arquivo de roteamento seja válido)
         NetworkSimulator simulator = new NetworkSimulator(listenerPort, neighboursFilePath, interfacesFilePath,
                 routingFilePath);
-        simulator.start();
+
+        if (simulator.getListener().isValid()) {
+            simulator.start();
+        } else {
+            System.err.println("Não foi possível iniciar o pois o arquivo de roteamento contém entradas inválidas");
+        }
     }
 
     /**
@@ -33,9 +40,12 @@ public class Main {
     }
 
     private static void printHelp() {
-        System.out.println("Parâmetros errados. Especifique a porta e o arquivo de vizinhos.");
+        System.out.println("Parâmetros errados. Especifique a porta e os arquivos corretamente.");
     }
 
+    /**
+     * Conta e retorna o número de linhas em um arquivo
+     */
     private static int countLinesInFile(String filepath) {
         int numberOfLines = -1;
         try {
