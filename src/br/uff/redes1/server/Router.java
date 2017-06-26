@@ -20,6 +20,8 @@ public class Router {
 
     public Router(List<Neighbour> interfaces, File routingFile) {
         valid = false;
+        this.interfaces = interfaces;
+        this.routes = new HashMap<>();
         loadRoutes(routingFile);
     }
 
@@ -100,7 +102,7 @@ public class Router {
      */
     public boolean isFinalDestination(String destinationIp) {
         for (Neighbour neighbour : interfaces) {
-            if (destinationIp == neighbour.getAddress()) {
+            if (destinationIp.equals(neighbour.getAddress())) {
                 return true;
             }
         }

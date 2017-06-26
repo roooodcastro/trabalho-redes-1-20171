@@ -1,5 +1,7 @@
 package br.uff.redes1;
 
+import br.uff.redes1.server.NetworkSimulator;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,9 +24,8 @@ public class Main {
         NetworkSimulator simulator = new NetworkSimulator(listenerPort, neighboursFilePath, interfacesFilePath,
                 routingFilePath);
 
-        if (simulator.getListener().isValid()) {
-            simulator.start();
-        } else {
+        simulator.start();
+        if (!simulator.getListener().isValid()) {
             System.err.println("Não foi possível iniciar o pois o arquivo de roteamento contém entradas inválidas");
         }
     }
@@ -35,7 +36,7 @@ public class Main {
      * @return Se os argumentos são válidos
      */
     private static boolean validateArguments(String[] args) {
-        if (args.length != 3) { return false; }
+        if (args.length != 4) { return false; }
         return countLinesInFile(args[1]) == countLinesInFile(args[2]);
     }
 

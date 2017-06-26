@@ -44,6 +44,15 @@ public class Datagram {
         return bytes;
     }
 
+    /**
+     * Decrementa o TTL do pacote. Caso o TTL chegue a zero, ele não deve mais ser roteado.
+     * @return True se o TTL ainda for maior que zero, false se o TTL for igual ou menor que zero.
+     */
+    public boolean decrementTtl() {
+        int newTtl = header.decreaseTtl();
+        return newTtl > 0;
+    }
+
     public boolean isFragmented() {
         return header.getIdentifier() > 0;
     }

@@ -67,7 +67,11 @@ public class Client extends Thread {
             if (nextJump != null) {
                 System.out.println("Redirecionando mensagem de " + datagram.getHeader().getSourceIp() + " para " +
                         nextJump.getAddress() + " (destino final: " + datagram.getHeader().getDestinationIp() + ")");
-                nextJump.sendMessage(datagram);
+                if (datagram.decrementTtl()) {
+                    nextJump.sendMessage(datagram);
+                } else {
+                    System.err.println("Não foi possível redirecionar pacote pois seu TTL chegou a zero");
+                }
             } else {
                 System.err.println("Não foi possível encontrar uma rota para " +
                         datagram.getHeader().getDestinationIp());

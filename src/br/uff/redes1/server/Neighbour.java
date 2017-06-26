@@ -25,7 +25,7 @@ public class Neighbour {
     }
 
     public Neighbour(String interfaceAddress, String subnetMask) {
-        this.address = address;
+        this.address = interfaceAddress;
         this.subnetMask = subnetMask;
     }
 

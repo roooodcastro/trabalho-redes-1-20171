@@ -47,6 +47,11 @@ public class Header {
         this.destinationIp = destinationIp;
     }
 
+    public int decreaseTtl() {
+        this.ttl -= 1;
+        return ttl;
+    }
+
     /**
      * Converte um array de bytes em um cabeçalho IPv4. Nesse simulador, apenas os campos length, identifier, ttl,
      * sourceIp e destinationIp são utilizados, com os demais estando em valores fixos ou zero.

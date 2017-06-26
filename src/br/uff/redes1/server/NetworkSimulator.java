@@ -1,7 +1,6 @@
-package br.uff.redes1;
+package br.uff.redes1.server;
 
-import br.uff.redes1.server.Neighbour;
-import br.uff.redes1.server.Listener;
+import br.uff.redes1.FileUtil;
 import br.uff.redes1.ui.CommandLineInterface;
 
 import java.io.*;
@@ -60,50 +59,12 @@ public class NetworkSimulator {
         }
     }
 
-    /**
-     * Retorna um vizinho a partir de um índice
-     */
-    public Neighbour getNeighbour(int index) {
-        return neighbours.get(index);
-    }
-
-    /**
-     * Tenta conectar a um vizinho. Apenas tenta a conexão caso o vizinho ainda não esteja conectado.
-     *
-     * @param neighbour O vizinho a ser conectado
-     * @return Um código de acordo com o resultado da conexão.
-     *  -2 significa que o vizinho passado não existe (é nulo)
-     *  -1 significa que o vizinho passado já está conectado
-     *  0  significa que o vizinho foi conectado corretamente
-     *  1  significa que o vizinho não pode ser conectado (um erro ocorreu)
-     */
-    public int connectNeighbour(Neighbour neighbour) {
-        if (neighbour == null) return -2;
-        if (neighbour.isConnected()) return -1;
-        neighbour.connect();
-        return neighbour.isConnected() ? 0 : 1;
-    }
-
     public List<Neighbour> getNeighbours() {
         return neighbours;
     }
 
     public Listener getListener() {
         return listener;
-    }
-
-    /**
-     * Retorna uma lista contendo os vizinhos que estão atualmente conectados
-     */
-    public List<Neighbour> getConnectedNeighbours() {
-        List<Neighbour> connectedNeighbours = new ArrayList<>(neighbours);
-        Predicate<Neighbour> neighbourPredicate = h-> !h.isConnected();
-        connectedNeighbours.removeIf(neighbourPredicate);
-        return connectedNeighbours;
-    }
-
-    public String[] getNeighboursNames() {
-        return getNeighboursNames(neighbours);
     }
 
     public List<Neighbour> getAvailableDestinations() {
