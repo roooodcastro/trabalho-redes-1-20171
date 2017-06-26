@@ -22,7 +22,7 @@ public class Header {
     private int length;         // Length of data
     private int identifier;     //
     private int flagOffset = 0; // Flags and offset, not used
-    private int ttl ;           // Time To Live, initially 7
+    private int ttl;           // Time To Live, initially 7
     private int upperLayer = 0;
     private int checksum = 0;
     private long sourceIp;
@@ -62,7 +62,7 @@ public class Header {
     public static Header fromBytes(byte[] array) {
         int length = (byteArrayToShort(Arrays.copyOfRange(array, 2, 4))) & 0xffff;
         int identifier = (byteArrayToShort(Arrays.copyOfRange(array, 4, 6))) & 0xffff;
-        int ttl = ((int) array[9]) & 0xff;
+        int ttl = ((int) array[8]) & 0xff;
         long sourceIp = ((long) byteArrayToInt(Arrays.copyOfRange(array, 12, 16))) & 0xffffffffL;
         long destinationIp = ((long) byteArrayToInt(Arrays.copyOfRange(array, 16, 20))) & 0xffffffffL;
         return new Header(length, identifier, ttl, sourceIp, destinationIp);

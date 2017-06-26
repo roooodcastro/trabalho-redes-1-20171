@@ -7,15 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03233556-58b2-47e1-9b76-a7e7049146e6" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/br/uff/redes1/NetworkSimulator.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/NetworkSimulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/Main.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java" afterPath="$PROJECT_DIR$/src/br/uff/redes1/ui/CommandLineInterface.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,18 +61,18 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="51" column="56" lean-forward="true" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
+            <state relative-caret-position="665">
+              <caret line="70" column="51" lean-forward="true" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Datagram.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Datagram.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="52" column="26" lean-forward="false" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+            <state relative-caret-position="745">
+              <caret line="51" column="42" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -89,14 +81,14 @@
       <file leaf-file-name="Header.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-580">
-              <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+            <state relative-caret-position="20">
+              <caret line="49" column="30" lean-forward="false" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileUtil.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/FileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -190,10 +182,10 @@
         <option value="$PROJECT_DIR$/arquivos/tabelas-roteamento/tabela_roteamento_h1.txt" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Neighbour.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Router.java" />
-        <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java" />
-        <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/Client.java" />
         <option value="$PROJECT_DIR$/src/br/uff/redes1/server/NetworkSimulator.java" />
+        <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java" />
+        <option value="$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java" />
       </list>
     </option>
   </component>
@@ -762,12 +754,12 @@
       <workItem from="1498190204063" duration="1232000" />
       <workItem from="1498322119501" duration="1238000" />
       <workItem from="1498428052338" duration="11038000" />
-      <workItem from="1498515311375" duration="4227000" />
+      <workItem from="1498515311375" duration="5123000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61535000" />
+    <option name="totallyTimeSpent" value="62431000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
@@ -1128,14 +1120,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="51" column="56" lean-forward="true" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/NetworkSimulator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
@@ -1164,22 +1148,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="52" column="26" lean-forward="false" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-580">
-          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/FileUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1187,6 +1155,30 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Header.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="49" column="30" lean-forward="false" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/server/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="70" column="51" lean-forward="true" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/br/uff/redes1/ipv4/Datagram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="51" column="42" lean-forward="false" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
