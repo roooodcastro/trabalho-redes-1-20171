@@ -93,7 +93,7 @@ public class CommandLineInterface {
         boolean anyConnected = false;
         for (Neighbour neighbour : simulator.getNeighbours()) {
             if (neighbour.isConnected()) {
-                System.out.println(neighbour.getPort() + "");
+                System.out.println("Conectado na porta " + neighbour.getPort());
                 anyConnected = true;
             }
         }
