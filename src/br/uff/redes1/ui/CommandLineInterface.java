@@ -15,7 +15,7 @@ public class CommandLineInterface {
     private CommandLineMenu actionsMenu;
 
     private String[] actionLabels = new String[] {
-            "Listar vizinhos conectados",
+            "Listar interfaces conectadas",
             "Enviar mensagem a um vizinho",
             "Terminar a execução"
     };
@@ -93,12 +93,12 @@ public class CommandLineInterface {
         boolean anyConnected = false;
         for (Neighbour neighbour : simulator.getNeighbours()) {
             if (neighbour.isConnected()) {
-                System.out.println(neighbour.toString());
+                System.out.println(neighbour.getPort() + "");
                 anyConnected = true;
             }
         }
         if (!anyConnected) {
-            System.out.println("Não há vizinhos conectados.");
+            System.out.println("Não há interfaces conectadas.");
         }
     }
 
